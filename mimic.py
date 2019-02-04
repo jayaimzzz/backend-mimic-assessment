@@ -47,15 +47,33 @@ import random
 import sys
 
 
+
 def mimic_dict(filename):
     """Returns mimic dict mapping each word to list of words which follow it."""
-    # +++your code here+++
+    file = open(filename, "r")
+    words = file.read().split(" ")
+    words = filter(lambda word: word != "*",words)
+    d = {}
+    for i in range(len(words) - 1):
+        word = words[i]
+        if word in d:
+            d[word].append(words[i + 1])
+        else:
+            d[word] = [words[i + 1]]
+    return d
     raise NotImplementedError("Get to Work!")
 
 
 def print_mimic(mimic_dict, word):
     """Given mimic dict and start word, prints 200 random words."""
-    # +++your code here+++
+    count = 0
+    result = ""
+    while count < 200:
+        word = random.choice(mimic_dict[word]) if random.choice(mimic_dict[word]) else ""
+        result += " " + word
+        count += 1
+    print result
+    return result
     raise NotImplementedError("Get to Work!")
 
 
